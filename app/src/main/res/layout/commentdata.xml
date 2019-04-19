@@ -4,27 +4,6 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Id:"
-        android:textSize="20dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="text"
-            android:textSize="20dp"
-            android:id="@+id/postid"
-            android:textColor="#000"
-            android:layout_marginLeft="40dp"
-            />
-
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -33,7 +12,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Title:"
+            android:text="id:"
             android:textSize="20dp"/>
 
         <TextView
@@ -41,7 +20,50 @@
             android:layout_height="wrap_content"
             android:text="text"
             android:textSize="20dp"
-            android:id="@+id/title"
+            android:id="@+id/commentid"
+            android:textColor="#000"
+            android:layout_marginLeft="50dp"
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email:"
+            android:textSize="20dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="text"
+            android:textSize="20dp"
+            android:id="@+id/C_email"
+            android:textColor="#000"
+            android:layout_marginLeft="20dp"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="name:"
+            android:textSize="20dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="text"
+            android:textSize="20dp"
+            android:id="@+id/C_name"
             android:textColor="#000"
             android:layout_marginLeft="20dp"/>
 
@@ -60,11 +82,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="text"
-            android:id="@+id/body"
+            android:id="@+id/C_body"
             android:textSize="20dp"
             android:textColor="#000"
-            android:layout_marginLeft="17dp"
-            />
+            android:layout_marginLeft="30dp"/>
 
     </LinearLayout>
     <View

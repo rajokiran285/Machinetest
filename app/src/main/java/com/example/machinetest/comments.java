@@ -21,33 +21,35 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Post extends AppCompatActivity {
+public class comments extends AppCompatActivity {
 
     AsyncHttpClient client;
     JSONArray jarray;
     JSONObject jobject;
     RequestParams params;
 
-    String url = "https://jsonplaceholder.typicode.com/posts";
+    String url = "https://jsonplaceholder.typicode.com/comments";
 
-    ArrayList<String> postid, title, body;
+    ArrayList<String> commentid, name, body,email;
 
 
     RecyclerView list;
-    Adapterview2 adapterview2;
+    Adapterview3 adapterview3;
+
 
     Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_post);
+        setContentView(R.layout.activity_comments);
 
-        postid = new ArrayList<>();
-        title = new ArrayList<>();
-        body = new ArrayList<>();
+        commentid=new ArrayList<>();
+        name=new ArrayList<>();
+        body=new ArrayList<>();
+        email=new ArrayList<>();
 
-        list = findViewById(R.id.postlist);
+        list = findViewById(R.id.commentlist);
 
         client = new AsyncHttpClient();
         params = new RequestParams();
@@ -55,7 +57,8 @@ public class Post extends AppCompatActivity {
 
         intent=getIntent();
         Bundle extras = intent.getExtras();
-        final String Userid = extras.getString("userid");
+        final String Postid = extras.getString("postid");
+
 
         client.get(url, params, new AsyncHttpResponseHandler() {
 
@@ -79,16 +82,20 @@ public class Post extends AppCompatActivity {
                     for (int i = 0; i < jarray.length(); i++) {
                         JSONObject obj = jarray.getJSONObject(i);
 
-                        String User_id=obj.getString("userId");
+                        String Post_id=obj.getString("postId");
 
-                        if(Userid.equals(User_id)) {
+                        if(Postid.equals(Post_id)) {
                             String ID = obj.getString("id");
                             System.out.println(ID);
-                            postid.add(ID);
+                            commentid.add(ID);
 
-                            String Title = obj.getString("title");
-                            System.out.println(Title);
-                            title.add(Title);
+                            String Email = obj.getString("email");
+                            System.out.println(Email);
+                            email.add(Email);
+
+                            String Name = obj.getString("name");
+                            System.out.println(Name);
+                            name.add(Name);
 
                             String Body = obj.getString("body");
                             System.out.println(Body);
@@ -102,43 +109,44 @@ public class Post extends AppCompatActivity {
 
                 }
 
-                int size=postid.size();
+                int size=commentid.size();
 
-                adapterview2=new Adapterview2(postid);
+                adapterview3=new Adapterview3(commentid);
                 LinearLayoutManager verticalLayoutmanager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
                 list.setLayoutManager(verticalLayoutmanager);
-                list.setAdapter(adapterview2);
+                list.setAdapter(adapterview3);
             }
         });
 
+
+
     }
 
-
-    class Adapterview2 extends RecyclerView.Adapter<Adapterview2.viewholderview> {
+    class Adapterview3 extends RecyclerView.Adapter<Adapterview3.viewholderview> {
 
         private List<String> verticalList;
 
-        public Adapterview2(List<String> verticalList) {
+        public Adapterview3(List<String> verticalList) {
             this.verticalList = verticalList;
         }
 
         @NonNull
         @Override
-        public Adapterview2.viewholderview onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        public Adapterview3.viewholderview onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
             View view = LayoutInflater.from(viewGroup.getContext())
-                    .inflate(R.layout.postdata, viewGroup, false);
+                    .inflate(R.layout.commentdata, viewGroup, false);
 
 
-            return new Adapterview2.viewholderview(view);
+            return new Adapterview3.viewholderview(view);
         }
 
         @Override
-        public void onBindViewHolder(@NonNull Adapterview2.viewholderview viewholderview, int i) {
+        public void onBindViewHolder(@NonNull Adapterview3.viewholderview viewholderview, int i) {
 
-            viewholderview.t1.setText(postid.get(i));
-            viewholderview.t2.setText(title.get(i));
-            viewholderview.t3.setText(body.get(i));
-//            viewholderview.t4.setText(address.get(i));
+            viewholderview.t1.setText(commentid.get(i));
+            viewholderview.t2.setText(email.get(i));
+            viewholderview.t3.setText(name.get(i));
+            viewholderview.t4.setText(body.get(i));
 //            viewholderview.t5.setText(suite.get(i));
 //            viewholderview.t6.setText(city.get(i));
 //            viewholderview.t7.setText(zipcode.get(i));
@@ -147,18 +155,6 @@ public class Post extends AppCompatActivity {
 //            viewholderview.t10.setText(phone.get(i));
 //            viewholderview.t11.setText(website.get(i));
 
-            final Bundle bundle=new Bundle();
-            bundle.putString("postid",postid.get(i));
-
-
-            viewholderview.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent i=new Intent(getApplicationContext(),comments.class);
-                    i.putExtras(bundle);
-                    startActivity(i);
-                }
-            });
 
         }
 
@@ -176,10 +172,10 @@ public class Post extends AppCompatActivity {
                 super(itemView);
 
 
-                t1=itemView.findViewById(R.id.postid);
-                t2=itemView.findViewById(R.id.title);
-                t3=itemView.findViewById(R.id.body);
-//                t4=itemView.findViewById(R.id.street);
+                t1=itemView.findViewById(R.id.commentid);
+                t2=itemView.findViewById(R.id.C_email);
+                t3=itemView.findViewById(R.id.C_name);
+                t4=itemView.findViewById(R.id.C_body);
 //                t5=itemView.findViewById(R.id.suite);
 //                t6=itemView.findViewById(R.id.city);
 //                t7=itemView.findViewById(R.id.zipcode);

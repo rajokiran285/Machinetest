@@ -1,5 +1,6 @@
 package com.example.machinetest;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -31,7 +32,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     ArrayList<String> id, name, username, email;
-    ArrayList<String> street, suite, city, zipcode,address;
+//    String[] street= new String[]{"Kulas Light", "Victor Plains","Douglas Extension","Hoeger Mall","Skiles Walks","Norberto Crossing","Rex Trail","Ellsworth Summit","Dayna Park","Kattie Turnpike"};
+    ArrayList<String> street,suite, city, zipcode,address;
     ArrayList<String> lat, log;
     ArrayList<String> phone, website;
     ArrayList<String> companyname, catchphrase, bs;
@@ -108,36 +110,40 @@ public class MainActivity extends AppCompatActivity {
                         email.add(Email);
 
 
-//                        String Adrss = obj.getString("address");
+                        String Adrss = obj.getString("address");
 ////                        street.add(Adrss);
-//                        JSONArray jarray2=new JSONArray(Adrss);
+//                        JSONObject jarray2=new JSONObject();
 //                        address.add(Adrss);
 //                        for (int j=0;j<jarray2.length();j++) {
-//                            JSONObject obj2 = jarray2.getJSONObject(j);
+                            JSONObject obj2 = new JSONObject(Adrss);
 //
-//                            String Street = obj2.getString("street");
-//                            System.out.println(Street);
-//                            street.add(Street);
-//
-//                            String Suite = obj2.getString("suite");
-//                            System.out.println(Suite);
-//                            suite.add(Suite);
-//
-//                            String City = obj2.getString("city");
-//                            System.out.println(City);
-//                            city.add(City);
-//
-//                            String Zipcode = obj2.getString("zipcode");
-//                            System.out.println(Zipcode);
-//                            zipcode.add(Zipcode);
-//
-////                            String Lat = obj.getString("lat");
-////                            System.out.println(Lat);
-////                            lat.add(Lat);
-////
-////                            String Log = obj.getString("log");
-////                            System.out.println(Log);
-////                            log.add(Log);
+                            String Street = obj2.getString("street");
+                            System.out.println(Street);
+                            street.add(Street);
+
+                            String Suite = obj2.getString("suite");
+                            System.out.println(Suite);
+                            suite.add(Suite);
+
+                            String City = obj2.getString("city");
+                            System.out.println(City);
+                            city.add(City);
+
+                            String Zipcode = obj2.getString("zipcode");
+                            System.out.println(Zipcode);
+                            zipcode.add(Zipcode);
+
+                            String Geo=obj2.getString("geo");
+
+                            JSONObject obj3=new JSONObject(Geo);
+
+                            String Lat = obj3.getString("lat");
+                            System.out.println(Lat);
+                            lat.add(Lat);
+
+                            String Log = obj3.getString("lng");
+                            System.out.println(Log);
+                            log.add(Log);
 //                        }
                         String Phone = obj.getString("phone");
                         System.out.println(Phone);
@@ -146,6 +152,18 @@ public class MainActivity extends AppCompatActivity {
                         String Website = obj.getString("website");
                         System.out.println(Website);
                         website.add(Website);
+
+                        String Company=obj.getString("company");
+                        JSONObject obj4=new JSONObject(Company);
+
+                        String Companyname=obj4.getString("name");
+                        companyname.add(Companyname);
+
+                        String Catchphrase=obj4.getString("catchPhrase");
+                        catchphrase.add(Catchphrase);
+
+                        String Bs=obj4.getString("bs");
+                        bs.add(Bs);
                     }
 
 
@@ -188,14 +206,32 @@ public class MainActivity extends AppCompatActivity {
             viewholderview.t1.setText(name.get(i));
             viewholderview.t2.setText(username.get(i));
             viewholderview.t3.setText(email.get(i));
-//            viewholderview.t4.setText(address.get(i));
-//            viewholderview.t5.setText(suite.get(i));
-//            viewholderview.t6.setText(city.get(i));
-//            viewholderview.t7.setText(zipcode.get(i));
-////            viewholderview.t8.setText(lat.get(i));
-////            viewholderview.t9.setText(log.get(i));
+            viewholderview.t4.setText(street.get(i));
+            viewholderview.t5.setText(suite.get(i));
+            viewholderview.t6.setText(city.get(i));
+            viewholderview.t7.setText(zipcode.get(i));
+            viewholderview.t8.setText(lat.get(i));
+            viewholderview.t9.setText(log.get(i));
             viewholderview.t10.setText(phone.get(i));
             viewholderview.t11.setText(website.get(i));
+            viewholderview.t12.setText(companyname.get(i));
+            viewholderview.t13.setText(catchphrase.get(i));
+            viewholderview.t14.setText(bs.get(i));
+
+            final Bundle bundle=new Bundle();
+            bundle.putString("userid",id.get(i));
+
+            viewholderview.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+
+
+                    Intent i=new Intent(getApplicationContext(),Post.class);
+                    i.putExtras(bundle);
+                    startActivity(i);
+                }
+            });
 
         }
 
